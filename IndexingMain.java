@@ -1,5 +1,6 @@
 import java.io.IOException;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -14,23 +15,34 @@ public class IndexingMain {
             System.exit(-1);
         }
 
-        @SuppressWarnings("deprecation")
-        Job job = new Job();
+//        @SuppressWarnings("deprecation")
+//        Job job = new Job();
+//        job.setJarByClass(IndexingMain.class);
+//        job.setJobName("Indexing");
+//        job.setMapperClass(IndexingMapper.class);
+//        job.setReducerClass(IndexingReducer.class);
+//        job.setOutputKeyClass(Text.class);
+//        job.setOutputValueClass(Text.class);
+////        job.setInputFormat(TextInputFormat.class);
+////        job.setOutputFormat(TextOutputFormat.class);
+//
+//        FileInputFormat.addInputPath(job, new Path(args[0]));
+//        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+//
+//        job.waitForCompletion(true);
+
+        Configuration conf = new Configuration();
+        Job job = Job.getInstance(conf, "Indexing");
         job.setJarByClass(IndexingMain.class);
-        job.setJobName("Indexing");
         job.setMapperClass(IndexingMapper.class);
+//        job.setCombinerClass(IntSumReducer.class);
         job.setReducerClass(IndexingReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-//        job.setInputFormat(TextInputFormat.class);
-//        job.setOutputFormat(TextOutputFormat.class);
-
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
-
-        job.waitForCompletion(true);
-
-//        JobConf conf = new JobConf(IndexingMain.class);
+        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        
 //        conf.setJobName("Indexing");
 //
 //        conf.setOutputKeyClass(Text.class);
