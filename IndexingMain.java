@@ -15,7 +15,7 @@ public class IndexingMain {
         }
 
         @SuppressWarnings("deprecation")
-		Job job = new Job();
+        Job job = new Job();
         job.setJarByClass(IndexingMain.class);
         job.setJobName("Indexing");
         job.setMapperClass(IndexingMapper.class);
