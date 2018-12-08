@@ -12,9 +12,9 @@ public class IndexingMapper extends Mapper<LongWritable,Text,Text,Text> {
 	{
 		/*Get the name of the file using context.getInputSplit()method*/
 		String fileName = ((FileSplit) context.getInputSplit()).getPath().getName();
-		String line=value.toString();
+		String line = value.toString();
 		//Split the line in words
-		String words[]=line.split(" ");
+		String words[] = line.split(" ");
 		for(String s:words){
 			//for each word emit word as key and file name as value
 			context.write(new Text(s), new Text(fileName));
