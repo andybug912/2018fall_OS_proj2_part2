@@ -14,15 +14,16 @@ public class IndexingMain {
             System.exit(-1);
         }
 
-        Job job = new Job();
+        @SuppressWarnings("deprecation")
+		Job job = new Job();
         job.setJarByClass(IndexingMain.class);
         job.setJobName("Indexing");
         job.setMapperClass(IndexingMapper.class);
         job.setReducerClass(IndexingReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-        job.setInputFormat(TextInputFormat.class);
-        job.setOutputFormat(TextOutputFormat.class);
+//        job.setInputFormat(TextInputFormat.class);
+//        job.setOutputFormat(TextOutputFormat.class);
 
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
