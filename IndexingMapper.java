@@ -21,7 +21,6 @@ public class IndexingMapper extends Mapper<LongWritable,Text,Text,Item> {
             String[] words = wordWithPunctuation.replaceAll("[!@#$%^&*()-=+,.?<>\'\"]", " ").trim().split(" ");
             for (String word: words) {
                 if (word.equals("") || word.charAt(0) < 'a' || word.charAt(0) > 'z') continue;
-//                context.write(new Text(word), new Item(new Text(fileName), one));
                 context.write(new Text(word), new Item(fileName, 1));
             }
 		}
