@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
@@ -21,13 +22,13 @@ public class QueryMapper extends Mapper<LongWritable,Text,Text,Text> {
         String[] input = value.toString().split("\\{");
         String term = input[0].trim();
         StringBuilder sb = new StringBuilder();
-        if (keyWordSet.contains()) {
+        if (keyWordSet.contains(sb)) {
             String[] items = input[1].substring(0, input[1].length() - 1).split(", ");
             for (String item: items) {
                 String fileName = item.split("=")[0];
                 sb.append(fileName + " 1");
             }
-            context.write(term, sb.toString().trim());
+            context.write(new Text(term), new Text(sb.toString().trim()));
         }
     }
 }
