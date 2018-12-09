@@ -7,7 +7,7 @@ import org.apache.hadoop.mapreduce.Reducer;
 public class IndexingReducer extends Reducer<Text, Text, Text, Text>{
 	@Override
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
-		HashMap map = new HashMap();
+		HashMap<String, Integer> map = new HashMap<>();
 		int count = 0;
 		for(Text t: values){
 			String str = t.toString();
