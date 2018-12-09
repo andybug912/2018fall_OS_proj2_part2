@@ -10,6 +10,10 @@ public class Item implements Writable{
 	private Text fileName;
 	private IntWritable count;
 	
+	public Item(Text fileName, IntWritable count) {
+		this.fileName = fileName;
+		this.count = count;
+	}
 	
 	@Override
 	public void readFields(DataInput arg0) throws IOException {
@@ -25,10 +29,7 @@ public class Item implements Writable{
 		count.write(arg0);
 	}
 	
-	public Item(Text fileName, IntWritable count) {
-		this.fileName = fileName;
-		this.count = count;
-	}
+	
 	
 	public Text getFileName() {
 		return fileName;
