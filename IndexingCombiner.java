@@ -14,14 +14,15 @@ public class IndexingCombiner extends Reducer<Text, Item, Text, Item>{
 		HashMap<String, Integer> map = new HashMap<>();
 		for(Item item: values){
 			String fileName = item.getFileName().toString();
-			int count = item.getCount().get();
+			int count = item.getCount();
 			map.put(fileName, map.getOrDefault(fileName, 0) + count);
 		}
 		Iterator<Entry<String, Integer>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
 			@SuppressWarnings("unchecked")
 			Map.Entry<String, Integer> pair = (Map.Entry<String, Integer>) iterator.next();
-			context.write(key, new Item(new Text(pair.getKey()), new IntWritable(pair.getValue())));
+//			context.write(key, new Item(new Text(pair.getKey()), new IntWritable(pair.getValue())));
+			context.write(key, new Item(pair.getKey(), pair.getValue()));
 		}
 	}
 }

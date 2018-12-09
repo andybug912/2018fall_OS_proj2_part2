@@ -10,8 +10,8 @@ public class IndexingReducer extends Reducer<Text, Item, Text, Text>{
 		HashMap<String, Integer> map = new HashMap<>();
 //		int count = 0;
 		for(Item item: values){
-			String fileName = item.getFileName().toString();
-			int count = item.getCount().get();
+			String fileName = item.getFileName();
+			int count = item.getCount();
 			map.put(fileName, map.getOrDefault(fileName, 0) + count);
 			
 			
