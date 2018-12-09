@@ -22,11 +22,11 @@ public class QueryMapper extends Mapper<LongWritable,Text,Text,Text> {
         String[] input = value.toString().split("\\{");
         String term = input[0].trim();
         StringBuilder sb = new StringBuilder();
-        if (keyWordSet.contains(sb)) {
+        if (keyWordSet.contains(term)) {
             String[] items = input[1].substring(0, input[1].length() - 1).split(", ");
             for (String item: items) {
                 String fileName = item.split("=")[0];
-                sb.append(fileName + " 1");
+                sb.append(fileName + " ");
             }
             context.write(new Text(term), new Text(sb.toString().trim()));
         }
