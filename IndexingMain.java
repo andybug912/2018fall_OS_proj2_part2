@@ -10,10 +10,12 @@ import org.apache.hadoop.mapreduce.Job;
 public class IndexingMain {
 
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-        if (args.length != 2) {
+        /*
+    	if (args.length != 2) {
             System.err.println("Usage: IndexingMain <input path> <output path>");
             System.exit(-1);
         }
+        */
 
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf, "Indexing");
@@ -21,12 +23,14 @@ public class IndexingMain {
         job.setMapperClass(IndexingMapper.class);
         job.setMapOutputValueClass(Item.class);
         job.setMapOutputKeyClass(Text.class);
-//        job.setCombinerClass(IntSumReducer.class);
+        job.setCombinerClass(IndexingCombiner.class);
         job.setReducerClass(IndexingReducer.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
-        FileInputFormat.addInputPath(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        FileInputFormat.addInputPath(job, new Path("hdfs://localhost:9000/user/input/books"));
+        FileOutputFormat.setOutputPath(job, new Path("hdfs://localhost:9000/user/output/test1"));
+        //System.exit(job.waitForCompletion(true) ? 0 : 1);
+        job.waitForCompletion(true);
+        System.out.println("DONE");
     }
 }
