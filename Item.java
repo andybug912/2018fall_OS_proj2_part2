@@ -18,6 +18,9 @@ public class Item implements Writable{
 		this.count = count;
 	}
 	*/
+	public Item() {
+		
+	}
 	
 	public Item(String fileName, int count) {
 		this.fileName = fileName;
