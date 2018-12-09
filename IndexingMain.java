@@ -19,6 +19,8 @@ public class IndexingMain {
         Job job = Job.getInstance(conf, "Indexing");
         job.setJarByClass(IndexingMain.class);
         job.setMapperClass(IndexingMapper.class);
+        job.setMapOutputValueClass(Item.class);
+        job.setMapOutputKeyClass(Text.class);
 //        job.setCombinerClass(IntSumReducer.class);
         job.setReducerClass(IndexingReducer.class);
         job.setOutputKeyClass(Text.class);

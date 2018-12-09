@@ -9,6 +9,8 @@ import org.apache.hadoop.io.Writable;
 public class Item implements Writable{
 	private Text fileName;
 	private IntWritable count;
+	
+	
 	@Override
 	public void readFields(DataInput arg0) throws IOException {
 		// TODO Auto-generated method stub
