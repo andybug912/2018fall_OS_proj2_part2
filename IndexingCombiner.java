@@ -19,7 +19,7 @@ public class IndexingCombiner extends Reducer<Text, Item, Text, Item>{
 				map.put(fileName, map.get(fileName) + count);
 			}
 			else {
-				map.put(fileName, 0);
+				map.put(fileName, count);
 			}
 			// map.put(fileName, map.getOrDefault(fileName, 0) + count);
 		}

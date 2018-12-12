@@ -11,7 +11,13 @@ public class IndexingReducer extends Reducer<Text, Item, Text, Text>{
 		for(Item item: values){
 			String fileName = item.getFileName();
 			int count = item.getCount();
-			map.put(fileName, map.getOrDefault(fileName, 0) + count);
+			if (map.contains(fileName)) {
+				map.put(fileName, map.get(fileName) + count);
+			}
+			else {
+				map.put(fileName, count);
+			}
+			// map.put(fileName, map.getOrDefault(fileName, 0) + count);
 		}
 		context.write(key, new Text(map.toString()));
 	}
