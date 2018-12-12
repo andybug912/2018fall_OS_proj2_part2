@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.*;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -7,11 +7,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 public class IndexingReducer extends Reducer<Text, Item, Text, Text>{
 	@Override
 	public void reduce(Text key, Iterable<Item> values, Context context) throws IOException, InterruptedException {
-		HashMap<String, Integer> map = new HashMap<>();
+		Map<String, Integer> map = new HashMap<>();
 		for(Item item: values){
 			String fileName = item.getFileName();
 			int count = item.getCount();
-			if (map.contains(fileName)) {
+			if (map.containsKey(fileName)) {
 				map.put(fileName, map.get(fileName) + count);
 			}
 			else {

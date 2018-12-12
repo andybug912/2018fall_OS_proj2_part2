@@ -11,11 +11,11 @@ import org.apache.hadoop.mapreduce.Reducer;
 public class IndexingCombiner extends Reducer<Text, Item, Text, Item>{
 	@Override
 	public void reduce(Text key, Iterable<Item> values, Context context) throws IOException, InterruptedException {
-		HashMap<String, Integer> map = new HashMap<>();
+		map<String, Integer> map = new HashMap<>();
 		for(Item item: values){
 			String fileName = item.getFileName().toString();
 			int count = item.getCount();
-			if (map.contains(fileName)) {
+			if (map.containsKey(fileName)) {
 				map.put(fileName, map.get(fileName) + count);
 			}
 			else {
