@@ -15,7 +15,13 @@ public class IndexingCombiner extends Reducer<Text, Item, Text, Item>{
 		for(Item item: values){
 			String fileName = item.getFileName().toString();
 			int count = item.getCount();
-			map.put(fileName, map.getOrDefault(fileName, 0) + count);
+			if (map.contains(fileName)) {
+				map.put(fileName, map.get(fileName) + count);
+			}
+			else {
+				map.put(fileName, 0);
+			}
+			// map.put(fileName, map.getOrDefault(fileName, 0) + count);
 		}
 		Iterator<Entry<String, Integer>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
